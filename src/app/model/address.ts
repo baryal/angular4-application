@@ -1,8 +1,8 @@
 export class Address{
     id:number;
-    addresstype:string;
+    addressType:string;
     street:string;
     city:string;
     state:string;
-    zipCode:number;
+    zipCode:string;
 }

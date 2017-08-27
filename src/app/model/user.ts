@@ -1,4 +1,6 @@
-export class User{
+import { Address } from "./address";
+
+export class User {
     id:number;
     firstName:string;
     lastName:string;
@@ -7,4 +9,5 @@ export class User{
     consent: string;
     email:string;
     password:string;
+    adress:Address;
  }
