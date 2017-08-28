@@ -9,6 +9,7 @@ import { UserService } from "../user.service";
 export class LoginComponent implements OnInit {
 
   user = { email:"email", password:"password" };
+  errorMsg:string = null;
   constructor(private userService:UserService) { }
 
   ngOnInit() {
@@ -25,7 +26,9 @@ export class LoginComponent implements OnInit {
                         }
                         ,
                         error => {
-                          alert("Incorrect email or password. please try again later!!");
+                          this.errorMsg = <any>error["message"];
+                          
+                          alert(this.errorMsg);
                         }
                       );
   }

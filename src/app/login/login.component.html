@@ -31,6 +31,10 @@
                placeholder="Enter password">
       </div>
     </div>
+    <div *ngIf="errorMsg">
+      {{errorMsg}}
+    </div>
+    <br/>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-primary">Log In</button>

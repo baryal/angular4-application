@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+
 import { User } from "./model/user";
 
 @Injectable()
@@ -36,6 +38,7 @@ private userUrl:string ='https://microservice-api.herokuapp.com/';
                       return response.json();
                     })
                     .catch(error => {
+                      console.log("Error: " + error.json()["message"])
                       return Observable.throw(error.json());
                   });
   }
