@@ -4,7 +4,7 @@ export class User {
     id:number;
     firstName:string;
     lastName:string;
-    dateOfBirth:number;
+    dateOfBirth:string;
     gender:string;
     consent: string;
     email:string;

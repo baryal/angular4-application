@@ -38,10 +38,22 @@ private userUrl:string ='https://microservice-api.herokuapp.com/';
                       return response.json();
                     })
                     .catch(error => {
-                      console.log("Error: " + error.json()["message"])
                       return Observable.throw(error.json());
                   });
   }
 
+  getAllUsers():Observable<User[]> {
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    return this.http.get(this.userEndpoint + this.GET_ALL_USERS_PATH, { headers: headers })
+                    .map(response=> {
+                      return response.json();
+                    })
+                    .catch(error => {
+                      return Observable.throw(error.json());
+                  });
+  }
 }
 
