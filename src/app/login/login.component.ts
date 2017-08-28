@@ -27,8 +27,6 @@ export class LoginComponent implements OnInit {
                         ,
                         error => {
                           this.errorMsg = <any>error["message"];
-                          
-                          alert(this.errorMsg);
                         }
                       );
   }
