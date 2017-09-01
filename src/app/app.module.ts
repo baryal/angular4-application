@@ -10,6 +10,7 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 import { Routes, RouterModule } from "@angular/router";
 import { UserService } from "./user.service";
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { MyDatePickerModule } from "mydatepicker";
 
 
 
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    MyDatePickerModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }) // { enableTracing: true }<-- debugging purposes only
   ],
   exports: [RouterModule],

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from "../user.service";
 import { User } from "../model/user";
 
@@ -9,8 +9,13 @@ import { User } from "../model/user";
 })
 export class UserListComponent implements OnInit {
 
+  @ViewChild('userDetailModel') userDetailModel;
+  
   users:Array<User> = [];
   errorMsg:string = null;
+
+  selectedUser:User;
+
   constructor(private userService:UserService) { }
 
   ngOnInit() {
@@ -26,4 +31,14 @@ export class UserListComponent implements OnInit {
        }
      );
   }
+
+  openModel(user:User = null) {
+    console.log(user);
+    this.selectedUser = user;
+    this.userDetailModel.nativeElement.className = 'modal fade show';
+  }
+
+  closeModel() {
+    this.userDetailModel.nativeElement.className = 'modal hide';
+ }
 }

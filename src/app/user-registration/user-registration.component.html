@@ -1,3 +1,130 @@
-<p>
-  user-registration works!
-</p>
+<div class="container col-md-6 col-md-offset-3">
+  <h2 class="text-center">User-Registration</h2>
+  <form class="form-horoizontal" #userregistration="ngForm" (ngSubmit)="userregistration.form.valid && consentCheckBox.checked &&  onSubmit()"
+    novalidate>
+
+    <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !dateOfBirth.valid }">
+      <label class="control-label col-sm-3 " for="birthDay">Date of Birth:</label>
+      <div class="col-sm-8">
+          <my-date-picker name="birthDay" 
+                          [options]="myDatePickerOptions" 
+                          #dateOfBirth="ngModel"
+                          [(ngModel)]="user.dob" 
+                          required>
+          </my-date-picker>
+      </div>
+    </div>
+    <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !firstName.valid }">
+      <label class="control-label col-sm-3 " for="firstName">FirstName:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" name="firstName" #firstName="ngModel" required [(ngModel)]="user.firstName" placeholder="please enter your firstname">
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !lastName.valid }">
+      <label class="control-label col-sm-3 " for="lastName">LastName:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" name="lastName" #lastName="ngModel" required [(ngModel)]="user.lastName" placeholder="please enter your lastname">
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !email.valid }">
+      <label class="control-label col-sm-3 " for="email">Email:</label>
+      <div class="col-sm-8">
+        <input type="email" class="form-control" name="email" #email="ngModel" required [(ngModel)]="user.email" placeholder="Enter email">
+      </div>
+    </div>
+
+
+    <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !password.valid }">
+      <label class="control-label col-sm-3 " for="passowrd">Password:</label>
+      <div class="col-sm-8">
+        <input type="password" class="form-control" name="password" #password="ngModel" required [(ngModel)]="user.password" placeholder=" Enter password">
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !retypePassword.valid }">
+      <label class="control-label col-sm-3 " for="retypePassword">Password:</label>
+      <div class="col-sm-8">
+        <input type="password" class="form-control" name="retypePassword" #retypePassword="ngModel" required [(ngModel)]="user.password" placeholder="Re-Type Password">
+      </div>
+    </div>
+    <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !address.valid }">
+      <label class="control-label col-sm-3 " for="address">Street Address:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" name="address" #address="ngModel" required [(ngModel)]="user.address.street" placeholder="please enter your street address">
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !city.valid }">
+        <label class="control-label col-sm-3" for="city">City</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" name="city" #city="ngModel" required [(ngModel)]="user.address.city" placeholder="please enter your city">
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label class="control-label col-sm-3" for="state">State:</label>
+          <div class="col-sm-8">
+              <select class="form-control selectpicker"
+                      [(ngModel)]="user.address.state" 
+                      name="state" 
+                      ngModel 
+                      #state="ngModel">
+                  <option *ngFor="let option of states" 
+                          [ngValue]="option.code">
+                    {{option.label}}
+                  </option>
+              </select>
+        </div>
+      </div>
+
+        <div class="form-group" [ngClass]="{'has-error':userregistration.submitted && !zipcode.valid}">
+            <label class="control-label col-sm-3 " for="zipcode">Zipcode:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" name="zipcode" #zipcode="ngModel" required [(ngModel)]="user.address.zipCode" placeholder="please enter your zipcode">
+            </div>
+          </div> 
+
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="gender">Gender:</label>
+          <div class="col-sm-8">
+              <div class="radio" *ngFor="let option of genders">
+                  <label>
+                    <input type="radio"
+                          name="gender"
+                          ngModel
+                          #gender="ngModel"
+                          [(ngModel)]="user.gender"
+                          [checked]="user.gender==option.value"
+                          [value]="option.value">
+                    {{ option.label }}
+                    
+                  </label>
+              </div>
+          </div>      
+      </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-8">
+        <div class="checkbox">
+          <label><input type="checkbox" #consentCheckBox required>I agree with tersm and condition.</label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class=" col-sm-offset-3 col-sm-8">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-8">
+        <a href="#" [routerLink]="['/userlogin']">Already registered</a>
+      </div>
+    </div>
+  </form>
+</div>
