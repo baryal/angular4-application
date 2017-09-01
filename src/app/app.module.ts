@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { DatePickerModule } from 'ng2-datepicker-bootstrap';
+
+//import { MyDatePickerModule } from 'mydatepicker';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { UserListComponent } from './user-list/user-list.component';
@@ -10,6 +14,7 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 import { Routes, RouterModule } from "@angular/router";
 import { UserService } from "./user.service";
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { MyDatePickerModule } from "mydatepicker";
 
 
 
@@ -57,6 +62,8 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    //DatePickerModule,
+    MyDatePickerModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }) // { enableTracing: true }<-- debugging purposes only
   ],
   exports: [RouterModule],

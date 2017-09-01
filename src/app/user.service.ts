@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
-import { Http, Headers } from "@angular/http";
+import { Http, Headers, RequestOptions } from "@angular/http";
 
 import { Observable } from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
@@ -12,9 +12,10 @@ import { User } from "./model/user";
 
 @Injectable()
 export class UserService {
-private userUrl:string ='https://microservice-api.herokuapp.com/';
 
+  link = ['/user-list'];
 
+  private userUrl:string ='https://microservice-api.herokuapp.com/';
 
   userEndpoint:string = "https://microservice-api.herokuapp.com/";
   LOGIN_PATH:string = "login";//for login
@@ -23,18 +24,12 @@ private userUrl:string ='https://microservice-api.herokuapp.com/';
 
   constructor(private router: Router, private http:Http) { }
 
-  
   login(email:string, password:string):Observable<User[]> {
-
-    let link = ['/user-list'];
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-
     console.log(this.userEndpoint + this.LOGIN_PATH + "?email=" + email +"&password=" + password);
                          
-    return this.http.get(this.userEndpoint + this.LOGIN_PATH + "?email=" + email +"&password=" + password, { headers: headers })
-                    .map(response=> {
-                      this.router.navigate(link);
+    return this.http.get(this.userEndpoint + this.LOGIN_PATH + "?email=" + email +"&password=" + password)
+                    .map(response => {
+                      this.router.navigate(this.link);
                       return response.json();
                     })
                     .catch(error => {
@@ -43,15 +38,35 @@ private userUrl:string ='https://microservice-api.herokuapp.com/';
   }
 
   getAllUsers():Observable<User[]> {
-    
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this.http.get(this.userEndpoint + this.GET_ALL_USERS_PATH, { headers: headers })
+    return this.http.get(this.userEndpoint + this.GET_ALL_USERS_PATH)
                     .map(response=> {
                       return response.json();
                     })
                     .catch(error => {
+                      console.log(error.json());
+                      return Observable.throw(error.json());
+                  });
+  }
+
+  saveUser(user:User):Observable<any> {
+    
+    //let headers = new Headers();
+    //headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    console.log(user);
+    console.log(JSON.stringify(user));
+    
+    return this.http.post(this.userEndpoint + this.ADD_USER_PATH, JSON.stringify(user), options)
+                    .map(response => {
+                      this.router.navigate(this.link);
+                      return response.json();
+                    })
+                    .catch(error => {
+                      console.log(error.json());
                       return Observable.throw(error.json());
                   });
   }
