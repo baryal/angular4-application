@@ -3,6 +3,6 @@ export class Address{
     addressType:string = "Home";
     street:string;
     city:string;
-    state:string = "CO";
+    state:string = "MA";
     zipCode:string;
 }

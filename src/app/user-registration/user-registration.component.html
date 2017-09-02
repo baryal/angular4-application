@@ -1,17 +1,13 @@
-<div class="container col-md-6 col-md-offset-3">
+<div class="container col-md-6 col-md-offset-2">
   <h2 class="text-center">User-Registration</h2>
-  <form class="form-horoizontal" #userregistration="ngForm" (ngSubmit)="userregistration.form.valid && consentCheckBox.checked &&  onSubmit()"
+  <form class="form-horizontal" #userregistration="ngForm" (ngSubmit)="userregistration.form.valid && consentCheckBox.checked &&  onSubmit()"
     novalidate>
 
     <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !dateOfBirth.valid }">
       <label class="control-label col-sm-3 " for="birthDay">Date of Birth:</label>
       <div class="col-sm-8">
-          <my-date-picker name="birthDay" 
-                          [options]="myDatePickerOptions" 
-                          #dateOfBirth="ngModel"
-                          [(ngModel)]="user.dob" 
-                          required>
-          </my-date-picker>
+        <my-date-picker name="birthDay" [options]="myDatePickerOptions" #dateOfBirth="ngModel" [(ngModel)]="user.dob" required>
+        </my-date-picker>
       </div>
     </div>
     <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !firstName.valid }">
@@ -28,6 +24,25 @@
       </div>
     </div>
 
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="gender">Gender:</label>
+        <div class="col-sm-8">
+          <div class="radio" *ngFor="let option of genders">
+            <label>
+                      <input type="radio"
+                            name="gender"
+                            ngModel
+                            #gender="ngModel"
+                            [(ngModel)]="user.gender"
+                            [checked]="user.gender==option.value"
+                            [value]="option.value">
+                      {{ option.label }}
+                      
+                    </label>
+          </div>
+        </div>
+      </div>
+      
     <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !email.valid }">
       <label class="control-label col-sm-3 " for="email">Email:</label>
       <div class="col-sm-8">
@@ -46,7 +61,8 @@
     <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !retypePassword.valid }">
       <label class="control-label col-sm-3 " for="retypePassword">Password:</label>
       <div class="col-sm-8">
-        <input type="password" class="form-control" name="retypePassword" #retypePassword="ngModel" required [(ngModel)]="user.password" placeholder="Re-Type Password">
+        <input type="password" class="form-control" name="retypePassword" #retypePassword="ngModel" required [(ngModel)]="user.password"
+          placeholder="Re-Type Password">
       </div>
     </div>
     <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !address.valid }">
@@ -57,52 +73,29 @@
     </div>
 
     <div class="form-group" [ngClass]=" {'has-error':userregistration.submitted && !city.valid }">
-        <label class="control-label col-sm-3" for="city">City</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" name="city" #city="ngModel" required [(ngModel)]="user.address.city" placeholder="please enter your city">
-        </div>
+      <label class="control-label col-sm-3" for="city">City</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" name="city" #city="ngModel" required [(ngModel)]="user.address.city" placeholder="please enter your city">
       </div>
+    </div>
 
-      <div class="form-group">
-          <label class="control-label col-sm-3" for="state">State:</label>
-          <div class="col-sm-8">
-              <select class="form-control selectpicker"
-                      [(ngModel)]="user.address.state" 
-                      name="state" 
-                      ngModel 
-                      #state="ngModel">
-                  <option *ngFor="let option of states" 
-                          [ngValue]="option.code">
-                    {{option.label}}
-                  </option>
-              </select>
-        </div>
+    <div class="form-group" [ngClass]="{'has-error':userregistration.submitted && !zipcode.valid}">
+      <label class="control-label col-sm-3 " for="zipcode">Zipcode:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" name="zipcode" #zipcode="ngModel" required [(ngModel)]="user.address.zipCode" placeholder="please enter your zipcode">
       </div>
+    </div>
 
-        <div class="form-group" [ngClass]="{'has-error':userregistration.submitted && !zipcode.valid}">
-            <label class="control-label col-sm-3 " for="zipcode">Zipcode:</label>
-            <div class="col-sm-8">
-              <input type="text" class="form-control" name="zipcode" #zipcode="ngModel" required [(ngModel)]="user.address.zipCode" placeholder="please enter your zipcode">
-            </div>
-          </div> 
-
-        <div class="form-group">
-          <label class="control-label col-sm-3" for="gender">Gender:</label>
-          <div class="col-sm-8">
-              <div class="radio" *ngFor="let option of genders">
-                  <label>
-                    <input type="radio"
-                          name="gender"
-                          ngModel
-                          #gender="ngModel"
-                          [(ngModel)]="user.gender"
-                          [checked]="user.gender==option.value"
-                          [value]="option.value">
-                    {{ option.label }}
-                    
-                  </label>
-              </div>
-          </div>      
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="state">State:</label>
+        <div class="col-sm-8">          
+          <select class="form-control" [(ngModel)]="user.address.state" name="state" #state="ngModel">
+                    <option *ngFor="let option of states" 
+                      [ngValue]="option.code">
+                        {{option.label}}
+                    </option>
+          </select>
+        </div>
       </div>
 
     <div class="form-group">
@@ -113,6 +106,7 @@
       </div>
     </div>
 
+    
 
     <div class="form-group">
       <div class=" col-sm-offset-3 col-sm-8">
@@ -128,3 +122,42 @@
     </div>
   </form>
 </div>
+
+<!--
+
+  <div class="form-group">
+          <label class="control-label col-sm-3" for="state">State:</label>
+          <div class="col-sm-8">
+              <select class="form-control"
+                      [(ngModel)]="user.address.state" 
+                      name="state"  
+                      #state="ngModel">
+                  <option *ngFor="let option of states" 
+                          [ngValue]="option.code">
+                    {{option.label}}
+                  </option>
+              </select>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-3" for="state">State:</label>
+        <div class="col-sm-8">          
+          <select class="form-control" name="state" [(ngModel)]="user.address.state" #state="ngModel">
+                    <option *ngFor="let option of states" 
+                      [ngValue]="option.code">
+                        {{option.label}}
+                    </option>
+          </select>
+        </div>
+      </div>
+-->
+
+<!-- 
+  Form development detail:
+
+  https://scotch.io/tutorials/how-to-deal-with-different-form-controls-in-angular-2
+
+ -->
+
+ 
