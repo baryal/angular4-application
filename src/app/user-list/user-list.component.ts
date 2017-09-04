@@ -27,7 +27,7 @@ export class UserListComponent implements OnInit {
        }
        ,
        error => {
-         this.errorMsg = <any>error["message"];
+         this.errorMsg = error.hasOwnProperty("message") ? <any>error["message"] : "Server Error. Please check your connection and try agian.";
        }
      );
   }
