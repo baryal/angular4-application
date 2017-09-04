@@ -1,11 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
-import { DatePickerModule } from 'ng2-datepicker-bootstrap';
-
-//import { MyDatePickerModule } from 'mydatepicker';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -15,6 +11,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { UserService } from "./user.service";
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { MyDatePickerModule } from "mydatepicker";
+import { ReactiveLoginComponent } from "./login/reactive-login.component";
 
 
 
@@ -24,6 +21,10 @@ const appRoutes: Routes = [
                             {
                                 path: 'login',
                                 component: LoginComponent
+                            },
+                            {
+                                path: 'reactive-login',
+                                component: ReactiveLoginComponent
                             },
                             {
                                 path: 'user-registration',
@@ -56,13 +57,14 @@ const appRoutes: Routes = [
     LoginComponent,
     UserListComponent,
     UserRegistrationComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    ReactiveLoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
-    //DatePickerModule,
     MyDatePickerModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }) // { enableTracing: true }<-- debugging purposes only
   ],
