@@ -1,8 +1,8 @@
 .modal-dialog {
     margin: 0;
-    top: 50%;
+    top: 30%;
     position: absolute;
-    left: 50%;
+    left: 20%;
     transform: translate(-50%,-50%);
   }
 
@@ -31,7 +31,7 @@
 body.modal-open .modal {
     display: flex !important;
     height: 100%;
-} 
+}
 
 body.modal-open .modal .modal-dialog {
     margin: auto;

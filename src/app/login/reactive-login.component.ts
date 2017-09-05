@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../user.service";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'reactive-login',
@@ -65,12 +65,19 @@ export class ReactiveLoginComponent implements OnInit {
 
   loginForm:FormGroup;
 
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.loginForm = new FormGroup({
+    //
+   /* this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.minLength(2)]),
       password: new FormControl('', Validators.required)
+    });*/
+
+    //Form builder
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.minLength(2)]],
+      password: ['', Validators.required]
     });
   }
 
