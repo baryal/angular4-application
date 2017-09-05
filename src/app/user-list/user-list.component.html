@@ -45,18 +45,65 @@
                 <div class="modal-dialog vertical-align-center">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" #myModalLabel>Modal title</h4>
+                            <h4 class="modal-title" #myModalLabel>User Detail</h4>
                             <!--<button type="button" class="close" (click)="closeModel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                             </button>-->
                         </div>
                         <div class="modal-body">
-                            <div *ngIf="selectedUser">
-                                {{selectedUser.firstName}} + {{selectedUser.lastName}}
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <!-- Tabs Navigation -->
+                                <div>
+                                  <ul class="nav nav-tabs flex-wrap" role="tablist">
+                                    <li class="nav-item">
+                                      <a class="nav-link active" data-toggle="tab" href="#general" role="tab">General</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link" data-toggle="tab" href="#address" role="tab">Address</a>
+                                    </li>
+                                  </ul>
+
+                                  <!-- Tab panes -->
+                                  <div class="tab-content">
+                                    <div class="tab-pane active" id="general" role="tabpanel">
+                                      <form>
+                                        <div class="form-group">
+                                          Name: {{selectedUser.firstName}} {{selectedUser.lastName}}
+                                        </div>
+                                        <div class="form-group">
+                                          Email: {{selectedUser.email}}
+                                        </div>
+                                        <div class="form-group">
+                                          Date of Birth: {{selectedUser.dateOfBirth}}
+                                        </div>
+                                        <div class="form-group">
+                                          Gender: {{selectedUser.gender}}
+                                        </div>
+                                      </form>
+                                    </div>
+                                    <div class="tab-pane" id="address" role="tabpanel">
+                                      <form>
+                                        <div class="form-group">
+                                          Street: {{selectedUser.address.state}}
+                                        </div>
+                                        <div class="form-group">
+                                          City: {{selectedUser.address.city}}
+                                        </div>
+                                        <div class="form-group">
+                                          State: {{selectedUser.address.state}}
+                                        </div>
+                                        <div class="form-group">
+                                          Zip Code: {{selectedUser.address.zipCode}}
+                                        </div>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
+                          </div>
                         </div>
-                            
-                            
-                        
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
                             <button type="button" class="btn btn-primary">Save changes</button>

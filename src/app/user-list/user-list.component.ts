@@ -10,7 +10,7 @@ import { User } from "../model/user";
 export class UserListComponent implements OnInit {
 
   @ViewChild('userDetailModel') userDetailModel;
-  
+
   users:Array<User> = [];
   errorMsg:string = null;
 
@@ -33,7 +33,6 @@ export class UserListComponent implements OnInit {
   }
 
   openModel(user:User = null) {
-    console.log(user);
     this.selectedUser = user;
     this.userDetailModel.nativeElement.className = 'modal fade show';
   }
