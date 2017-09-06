@@ -1,4 +1,4 @@
 <div *ngIf="userService.isLoggedIn()" class="float-right login-user">
-  Hello {{ userService.loggedInUser.lastName }}, {{ userService.loggedInUser.firstName }}
+  Hello: <span style="color:black;font-size:14px;font-weight:bold">{{ userService.loggedInUser.lastName }}, {{ userService.loggedInUser.firstName }}</span>
 </div>
 <router-outlet></router-outlet>
