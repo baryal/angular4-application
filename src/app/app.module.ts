@@ -8,7 +8,7 @@ import {LoginComponent} from './login/login.component';
 import {UserListComponent} from './user-list/user-list.component';
 import {UserRegistrationComponent} from './user-registration/user-registration.component';
 import {Routes, RouterModule} from "@angular/router";
-import {UserService} from "./user.service";
+import {UserService} from "./services/user.service";
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {MyDatePickerModule} from "mydatepicker";
 import {ReactiveLoginComponent} from "./login/reactive-login.component";
