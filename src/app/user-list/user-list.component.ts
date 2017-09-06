@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {UserService} from "../user.service";
+import {UserService} from "../services/user.service";
 import {User} from "../model/user";
 
 @Component({
@@ -10,6 +10,7 @@ import {User} from "../model/user";
 export class UserListComponent implements OnInit {
 
   @ViewChild('userDetailModel') userDetailModel;
+  @ViewChild('deleteModal') deleteModal;
 
   users: Array<User> = [];
   errorMsg: string = null;
@@ -40,5 +41,19 @@ export class UserListComponent implements OnInit {
 
   closeModel() {
     this.userDetailModel.nativeElement.className = 'modal hide';
+  }
+
+  deleteUser() {
+    this.deleteModal.nativeElement.className = 'modal hide';
+    this.userService.deleteUser(this.selectedUser.id).subscribe(
+      data => {
+        this.users = data
+      }
+      ,
+      error => {
+        this.errorMsg = error.hasOwnProperty("message") ? <any>error["message"] : "Server Error. Something went wrong, Please try agian later.";
+        alert(this.errorMsg);
+      }
+    );
   }
 }

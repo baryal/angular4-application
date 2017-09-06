@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from "../user.service";
+import {Component, Input, OnInit} from '@angular/core';
+import { UserService } from "../services/user.service";
 import { User } from "../model/user";
 import {IMyDpOptions} from 'mydatepicker';
 
@@ -9,13 +9,13 @@ import {IMyDpOptions} from 'mydatepicker';
   styleUrls: ['./user-registration.component.css']
 })
 export class UserRegistrationComponent implements OnInit {
-  
+
   myDatePickerOptions: IMyDpOptions = {
     // other options...
     dateFormat: 'mm/dd/yyyy',
 };
 
-  user:User= new User ();
+  @Input() user:User= new User ();
   genders = [{value:"male", label:"Male"}, {value:"female", label:"Female"}, {value:"other", label:"Other"}];
 
   states = [{code:"CO", label:"Colorado"}, {code:"KS", label:"Kansas"}, {code:"MA", label:"Massachusetts"}, {code:"TX", label:"Texas"}];
@@ -28,7 +28,7 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   onSubmit(){
-    this.user.dateOfBirth = this.user.dob["formatted"]; 
+    this.user.dateOfBirth = this.user.dob["formatted"];
     this.userService.saveUser(this.user)
                     .subscribe(
                       response => {
