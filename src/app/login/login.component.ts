@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from "../user.service";
+import {Component, OnInit} from '@angular/core';
+import {UserService} from "../user.service";
 
 @Component({
   selector: 'app-login',
@@ -8,27 +8,29 @@ import { UserService } from "../user.service";
 })
 export class LoginComponent implements OnInit {
 
-  user = { email:"email", password:"password" };
-  errorMsg:string = null;
-  constructor(private userService:UserService) { }
+  user = {email: "email", password: "password"};
+  errorMsg: string = null;
+
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit() {
-    
+
   }
 
 
   onSubmit() {
     console.log("email: " + this.user.email + " and password: " + this.user.password);
     this.userService.login(this.user.email, this.user.password)
-                     .subscribe(
-                        response => {
-                          // doing logic with responce
-                        }
-                        ,
-                        error => {
-                          this.errorMsg = <any>error["message"];
-                        }
-                      );
+      .subscribe(
+        response => {
+          // doing logic with responce
+        }
+        ,
+        error => {
+          this.errorMsg = <any>error["message"];
+        }
+      );
   }
 
 }
