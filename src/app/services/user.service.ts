@@ -15,15 +15,15 @@ export class UserService {
 
   link = ['/user-list'];
 
-  private userUrl: string = 'https://microservice-api.herokuapp.com/';
+  private userUrl: string = 'https://microservice-api.herokuapp.com';
 
   userEndpoint: string = "https://microservice-api.herokuapp.com/";
-  LOGIN_PATH: string = "login";//for login
-  GET_ALL_USERS_PATH: string = "users";//to load all users from database
+  LOGIN_PATH: string = "/login";//for login
+  GET_ALL_USERS_PATH: string = "/users";//to load all users from database
   ADD_USER_PATH: string = "user/add";//to add a new user
   UPDATE_USER_PATH: string = "user/update";//to update a user
-  GET_USER_PATH: string = "user/get";//to get a user
-  DELETE_USER_PATH: string = "user/delete";//to delete a user
+  GET_USER_PATH: string = "user/get/";//to get a user
+  DELETE_USER_PATH: string = "user/delete/";//to delete a user
 
   loggedIn: boolean;
   loggedInUser: User;

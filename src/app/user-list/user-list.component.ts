@@ -44,7 +44,6 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser() {
-    this.deleteModal.nativeElement.className = 'modal hide';
     this.userService.deleteUser(this.selectedUser.id).subscribe(
       data => {
         this.users = data
