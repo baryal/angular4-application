@@ -13,6 +13,7 @@ import {UserDetailComponent} from './user-detail/user-detail.component';
 import {MyDatePickerModule} from "mydatepicker";
 import {ReactiveLoginComponent} from "./login/reactive-login.component";
 import {CanActivateViaAuthGuard} from "./authentication/CanActivateViaAuthGuard";
+import {RecipeBookComponent} from "./recipe-book/recipe-book.component";
 
 
 /**Routing implementation */
@@ -39,6 +40,10 @@ const appRoutes: Routes = [
     component: UserDetailComponent
   },
   {
+    path: 'recipe-book',
+    component: RecipeBookComponent
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
@@ -58,7 +63,8 @@ const appRoutes: Routes = [
     UserListComponent,
     UserRegistrationComponent,
     UserDetailComponent,
-    ReactiveLoginComponent
+    ReactiveLoginComponent,
+    RecipeBookComponent
   ],
   imports: [
     BrowserModule,
