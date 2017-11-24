@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipeBookComponent implements OnInit {
 
+  loadFeature = 'recipe';
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onNavigate(feature:string) {
+    this.loadFeature = feature;
   }
 
 }

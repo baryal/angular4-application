@@ -32,7 +32,8 @@ export class UserService {
   }
 
   isLoggedIn() {
-    return this.loggedIn;
+    //return this.loggedIn;
+    return true;
   }
 
   getLoggedInUser() {
