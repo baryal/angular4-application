@@ -1,4 +1,8 @@
-.dropdown-menu {
+.navbar-brand {
+  cursor: pointer;
+}
+
+.dropdown-item {
   cursor: pointer;
 }
 
