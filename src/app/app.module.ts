@@ -21,6 +21,14 @@ import { RecipeListComponent } from './recipe-book/recipes/recipe-list/recipe-li
 import { RecipeDetailComponent } from './recipe-book/recipes/recipe-detail/recipe-detail.component';
 import { RecipeItemComponent } from './recipe-book/recipes/recipe-list/recipe-item/recipe-item.component';
 import { ShoppingEditComponent } from './recipe-book/shopping-list/shopping-edit/shopping-edit.component';
+import { AngularFireModule } from "angularfire2";
+import { AngularFireDatabaseModule } from "angularfire2/database";
+import { AngularFireAuthModule } from "angularfire2/auth";
+import { environment } from "../environments/environment";
+import { OnlineShoppingComponent } from './online-shopping/online-shopping.component';
+import { OnlineShoppingHeaderComponent } from './online-shopping/header/online-shopping-header.component';
+import { CategoryService } from "./online-shopping/services/category.service";
+import { ProductService } from "./online-shopping/services/product.service";
 
 
 /**Routing implementation */
@@ -51,6 +59,10 @@ const appRoutes: Routes = [
     component: RecipeBookComponent
   },
   {
+    path: 'online-shopping',
+    component: OnlineShoppingComponent
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
@@ -78,7 +90,9 @@ const appRoutes: Routes = [
     RecipeListComponent,
     RecipeDetailComponent,
     RecipeItemComponent,
-    ShoppingEditComponent
+    ShoppingEditComponent,
+    OnlineShoppingComponent,
+    OnlineShoppingHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -86,12 +100,17 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpModule,
     MyDatePickerModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     RouterModule.forRoot(appRoutes, {enableTracing: true}) // { enableTracing: true }<-- debugging purposes only
   ],
   exports: [RouterModule],
   providers: [
     CanActivateViaAuthGuard,
-    UserService
+    UserService,
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
