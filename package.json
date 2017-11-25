@@ -27,7 +27,7 @@
     "@types/jasmine": "~2.5.53",
     "@types/node": "~6.0.60",
     "angular-4-data-table": "^0.2.4",
-    "angularfire2": "^ 5.0.0-rc.3",
+    "angularfire2": "^5.0.0-rc.3",
     "bootstrap": "^4.0.0-alpha.6",
     "bootstrap-select": "^1.12.4",
     "core-js": "^2.4.1",
