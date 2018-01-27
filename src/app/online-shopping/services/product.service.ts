@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFireDatabase} from "angularfire2/database";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class ProductService {
@@ -10,12 +11,12 @@ export class ProductService {
     return this.db.list('/products').push(product);
   }
 
-  getAll() {
-    return this.db.list('/products');
+  getAll(): Observable<any[]> {
+    return this.db.list('/products').valueChanges();
   }
 
-  get(productId) {
-    return this.db.object('/products/' + productId);
+  get(productId): Observable<any> {
+    return this.db.object('/products/' + productId).valueChanges();
   }
 
   update(productId, product) {

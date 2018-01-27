@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
-import {Headers, RequestOptions} from "@angular/http";
+import {Headers, Http, RequestOptions} from "@angular/http";
 
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
@@ -12,7 +12,6 @@ import {User} from "../model/user";
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import {HttpClient} from "@angular/common/http";
 
 
 @Injectable()
@@ -39,7 +38,7 @@ export class UserService {
 
 
 
-  constructor(private router: Router, private http: HttpClient, private firebaseAuth: AngularFireAuth) {
+  constructor(private router: Router, private http: Http, private firebaseAuth: AngularFireAuth) {
 
     this.user = firebaseAuth.authState;
     this.user.subscribe(

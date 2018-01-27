@@ -11,7 +11,7 @@ export class OnlineShoppingComponent implements OnInit {
   courses: any[];
 
   constructor(db: AngularFireDatabase) {
-    db.list('/courses').subscribe(courses => {
+    db.list('/courses').valueChanges().subscribe(courses => {
       this.courses = courses;
       console.log(this.courses);
     });
