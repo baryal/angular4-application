@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../services/user.service";
+import {AngularFireAuth, AUTH_PROVIDERS} from "angularfire2/auth";
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,7 @@ export class LoginComponent implements OnInit {
 
   user = {email: "email", password: "password"};
   errorMsg: string = null;
+  googleUser = {};
 
   constructor(private userService: UserService) {
   }
@@ -18,6 +20,9 @@ export class LoginComponent implements OnInit {
 
   }
 
+  signInWithGoogle() {
+    this.userService.signInWithGoogle();
+  }
 
   onSubmit() {
     console.log("email: " + this.user.email + " and password: " + this.user.password);

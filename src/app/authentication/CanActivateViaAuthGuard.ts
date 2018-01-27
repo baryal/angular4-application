@@ -11,12 +11,12 @@ export class CanActivateViaAuthGuard implements CanActivate {
 
     let url: string = state.url;
     console.log('Url:'+ url);
-    if (this.authService.isLoggedIn()) {
+    if (this.authService.isUserLoggedIn) {
       return true;
     }
     //this.authService.setRedirectUrl(url); if we have lots of route.
     //reference: http://www.concretepage.com/angular-2/angular-2-4-route-guards-canactivate-and-canactivatechild-example
-    this.router.navigate([this.authService.getLoginUrl()]);
+    this.router.navigate([this.authService.getLoginUrl()], {queryParams: {returnUrl: url}});
     return false;
   }
 

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
-import {Http, Headers, RequestOptions} from "@angular/http";
+import {Headers, RequestOptions} from "@angular/http";
 
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
@@ -9,6 +9,11 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 import {User} from "../model/user";
+
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+import {HttpClient} from "@angular/common/http";
+
 
 @Injectable()
 export class UserService {
@@ -28,12 +33,53 @@ export class UserService {
   loggedIn: boolean;
   loggedInUser: User;
 
-  constructor(private router: Router, private http: Http) {
+
+   user: Observable<firebase.User>;
+   userDetails: firebase.User = null;
+
+
+
+  constructor(private router: Router, private http: HttpClient, private firebaseAuth: AngularFireAuth) {
+
+    this.user = firebaseAuth.authState;
+    this.user.subscribe(
+      (user) => {
+        if (user) {
+          this.userDetails = user;
+          this.loggedInUser = new User();
+          this.loggedInUser.displayName = this.userDetails.displayName;
+          this.router.navigate(['/']);
+        }
+        else {
+          this.userDetails = null;
+        }
+      }
+    );
+  }
+
+
+  signInWithGoogle() {
+    return this.firebaseAuth.auth.signInWithPopup(
+      new firebase.auth.GoogleAuthProvider()
+    );
+  }
+
+  get isUserLoggedIn() {
+    if (this.userDetails ||  this.isLoggedIn()) return true;
+    return false;
+  }
+
+  logout() {
+    if (!this.userDetails) {
+      this.loggedIn = false;
+      return;
+    }
+    this.firebaseAuth.auth.signOut()
+      .then((res) => this.router.navigate(['/']));
   }
 
   isLoggedIn() {
-    //return this.loggedIn;
-    return true;
+    return this.loggedIn;
   }
 
   getLoggedInUser() {
@@ -50,8 +96,9 @@ export class UserService {
     return this.http.get(this.userEndpoint + this.LOGIN_PATH + "?email=" + email + "&password=" + password)
       .map(response => {
         this.loggedIn = true;
-        this.router.navigate(this.link);
+        this.router.navigate(['/']);
         this.loggedInUser = response.json();
+        this.loggedInUser.displayName = this.loggedInUser.firstName + ' ' + this.loggedInUser.lastName;
         return response.json();
       })
       .catch(error => {
