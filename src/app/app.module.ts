@@ -1,7 +1,12 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {CustomFormsModule} from 'ng2-validation';
 import {HttpModule} from '@angular/http';
+import {DataTableModule} from 'angular-4-data-table';
+
+
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
@@ -29,6 +34,16 @@ import { OnlineShoppingComponent } from './online-shopping/online-shopping.compo
 import { OnlineShoppingHeaderComponent } from './online-shopping/header/online-shopping-header.component';
 import { CategoryService } from "./online-shopping/services/category.service";
 import { ProductService } from "./online-shopping/services/product.service";
+import { ShoppingCartService } from "./online-shopping/services/shopping-cart.service";
+import { ProductsComponent } from './online-shopping/products/products.component';
+import { ShoppingCartComponent } from './online-shopping/shopping-cart/shopping-cart.component';
+import { CheckOutComponent } from './online-shopping/check-out/check-out.component';
+import { OrderSuccessComponent } from './online-shopping/order-success/order-success.component';
+import { AdminProductsComponent } from './online-shopping/admin-products/admin-products.component';
+import { AdminOrdersComponent } from './online-shopping/admin-orders/admin-orders.component';
+import { ProductFormComponent } from './online-shopping/admin/product-form/product-form.component';
+import { ProductFilterComponent } from './online-shopping/products/product-filter/product-filter.component';
+import { ProductCardComponent } from './online-shopping/product-card/product-card.component';
 
 
 /**Routing implementation */
@@ -63,13 +78,49 @@ const appRoutes: Routes = [
     component: OnlineShoppingComponent
   },
   {
+    path: 'products',
+    component: ProductsComponent
+  },
+  {
+    path: 'shopping-cart',
+    component: ShoppingCartComponent
+  },
+  {
+    path: 'check-out',
+    component: CheckOutComponent
+  },
+  {
+    path: 'order-success',
+    component: OrderSuccessComponent
+  },
+  {
+    path: 'admin/products',
+    component: AdminProductsComponent,
+    canActivate: [CanActivateViaAuthGuard]
+  },
+  {
+    path: 'admin/products/new',
+    component: ProductFormComponent,
+    canActivate: [CanActivateViaAuthGuard]
+  },
+  {
+    path: 'admin/products/:id',
+    component: ProductFormComponent,
+    canActivate: [CanActivateViaAuthGuard]
+  },
+  {
+    path: 'admin/orders',
+    component: AdminOrdersComponent,
+    canActivate: [CanActivateViaAuthGuard]
+  },
+  {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'products',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'login',
+    redirectTo: 'products',
     pathMatch: 'full'
   }
 ];
@@ -92,7 +143,16 @@ const appRoutes: Routes = [
     RecipeItemComponent,
     ShoppingEditComponent,
     OnlineShoppingComponent,
-    OnlineShoppingHeaderComponent
+    OnlineShoppingHeaderComponent,
+    ProductsComponent,
+    ShoppingCartComponent,
+    CheckOutComponent,
+    OrderSuccessComponent,
+    AdminProductsComponent,
+    AdminOrdersComponent,
+    ProductFormComponent,
+    ProductFilterComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
@@ -103,6 +163,7 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(appRoutes, {enableTracing: true}) // { enableTracing: true }<-- debugging purposes only
   ],
   exports: [RouterModule],
@@ -110,7 +171,8 @@ const appRoutes: Routes = [
     CanActivateViaAuthGuard,
     UserService,
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })

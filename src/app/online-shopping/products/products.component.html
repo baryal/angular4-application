@@ -1,0 +1,26 @@
+<div>
+  This is from navigator.platform: {{getDevice()}}
+</div>
+
+<div>
+  This is from navigator.userAgent: {{isMobileOrTablet()}}
+</div>
+
+<div class="row">
+  <div class="col-3">
+    <app-product-filter [category]="category"></app-product-filter>
+  </div>
+  <div class="col">
+    <div class="row">
+      <ng-container *ngFor="let product of filteredProducts; let i = index">
+        <div class="col-4">
+          <app-product-card [product]="product" style="width: 30rem;"></app-product-card>
+        </div>
+        <div *ngIf="(i+1) % 2 === 0" class="w-100"></div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+
+
